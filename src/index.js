@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import * as aa from './t1';
 
 function component() {
   const element = document.createElement('div');
@@ -8,5 +9,10 @@ function component() {
 
   return element;
 }
+
+const arr = [1, 2, 3];
+arr.map(item => {
+  console.log("item:", item);
+})
 
 document.body.appendChild(component());

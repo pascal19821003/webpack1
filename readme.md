@@ -853,3 +853,62 @@ module.exports = {
 ### 总结
 
 ESLint 可以独立使用，也可以集成到 Webpack 中。独立使用提供了最大的灵活性和简单性，而与 Webpack 集成则可以在开发过程中提供更好的即时反馈。你可以根据项目需求选择适合的方式，甚至同时使用这两种方法，以便在开发和构建过程中都进行代码质量检查。
+
+
+## 8. eslint报这个错：'document' is not defined.eslintno-undef
+
+这个错误通常发生在 ESLint 解析代码时，不知道 `document` 是一个全局变量。通常在浏览器环境中，`document` 是一个全局对象，但 ESLint 需要显式配置来识别这种环境。
+
+### 解决方法
+
+你需要在 ESLint 配置文件中指定代码运行的环境。对于浏览器环境，可以在 `.eslintrc.js` 文件中添加 `env` 设置，指定 `browser` 环境。
+
+### 步骤
+
+1. **打开 ESLint 配置文件 `.eslintrc.js`**（或你使用的其他配置文件形式，如 `.eslintrc.json`）。
+
+2. **添加 `env` 配置**，指定浏览器环境：
+
+```javascript
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript'
+  ],
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
+  env: {
+    browser: true,  // 添加这一行
+    node: true      // 如果你也需要支持 Node.js 环境
+  },
+  rules: {
+    'react/prop-types': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'import/no-unresolved': 'error',
+    'import/order': ['error', { 'newlines-between': 'always' }]
+  },
+  ignorePatterns: ['node_modules/', 'dist/']
+};
+```
+
+### 总结
+
+在 ESLint 配置文件中指定 `env` 设置为 `browser`，可以解决 ESLint 报 `'document' is not defined.eslintno-undef` 的问题。这样 ESLint 就会知道 `document` 是浏览器环境中的全局变量。
+
+通过这种方式，其他浏览器环境中的全局变量如 `window` 和 `navigator` 也会被识别。如果你的项目还需要支持 Node.js 环境，可以同时添加 `node: true`。

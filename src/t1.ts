@@ -1,4 +1,4 @@
-const aa: string= "helo world";
-console.log("aa", aa)
+const aa: string = "helo world";
+console.log("aa", aa);
 
-export {aa};
+export { aa };

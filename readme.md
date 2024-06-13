@@ -912,3 +912,48 @@ module.exports = {
 在 ESLint 配置文件中指定 `env` 设置为 `browser`，可以解决 ESLint 报 `'document' is not defined.eslintno-undef` 的问题。这样 ESLint 就会知道 `document` 是浏览器环境中的全局变量。
 
 通过这种方式，其他浏览器环境中的全局变量如 `window` 和 `navigator` 也会被识别。如果你的项目还需要支持 Node.js 环境，可以同时添加 `node: true`。
+
+
+## 9. run webpack-dev-server
+
+npx webpack-dev-server --open
+
+## 10. npm工程，webpack如何集成服务
+
+如果Webpack在执行时找不到public目录，这可能是因为在Webpack配置中未指定public目录的位置。要解决这个问题，你可以按照以下步骤进行操作：
+
+1. **创建public目录**：首先，确保你的项目中存在public目录。如果没有，请创建一个。该目录通常用于存放Webpack不需要处理的静态文件，例如HTML文件、图片等。
+
+2. **配置Webpack**：在Webpack配置文件中指定publicPath，告诉Webpack从哪里提供静态文件。通常，publicPath的值是相对于Webpack服务器的根目录的路径。
+
+```javascript
+// webpack.config.js
+
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js', // 入口文件
+  output: {
+    path: path.resolve(__dirname, 'dist'), // 输出目录
+    filename: 'bundle.js', // 输出文件名
+    publicPath: '/' // 指定public目录路径
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/, // 匹配.js文件
+        exclude: /node_modules/, // 排除node_modules目录
+        use: {
+          loader: 'babel-loader' // 使用babel-loader处理js文件
+        }
+      }
+    ]
+  }
+};
+```
+
+3. **将静态文件移动到public目录**：确保你的静态文件（例如index.html）位于public目录中。
+
+4. **重新启动Webpack服务**：运行npm start重新启动Webpack服务。
+
+这样，Webpack应该能够正确找到public目录中的文件，并在启动时加载它们。

@@ -957,3 +957,129 @@ module.exports = {
 4. **重新启动Webpack服务**：运行npm start重新启动Webpack服务。
 
 这样，Webpack应该能够正确找到public目录中的文件，并在启动时加载它们。
+
+
+## 11. tsx 
+
+npm i --save-dev @types/react
+
+## 12. 我还要集成reactjs，改怎么做？
+
+
+若要在Webpack中集成React.js，你需要对Webpack配置进行一些修改以支持React的编译和加载。下面是如何修改Webpack配置文件以支持React的示例：
+
+首先，确保你已经安装了React和相关的Babel插件。可以通过以下命令进行安装：
+
+```bash
+npm install react react-dom @babel/preset-react --save
+```
+
+接下来，修改Webpack配置文件：
+
+```javascript
+// webpack.config.js
+
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js', // 入口文件
+  output: {
+    path: path.resolve(__dirname, 'dist'), // 输出目录
+    filename: 'bundle.js', // 输出文件名
+    publicPath: '/' // 指定public目录路径
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/, // 匹配.js文件
+        exclude: /node_modules/, // 排除node_modules目录
+        use: {
+          loader: 'babel-loader', // 使用babel-loader处理js文件
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'] // 添加React预设
+          }
+        }
+      }
+    ]
+  }
+};
+```
+
+在这个示例中，我们添加了`@babel/preset-react`预设到babel-loader的选项中，以便让Webpack正确地编译React代码。
+
+然后，你可以创建React组件并在入口文件（通常是index.js）中引入它们：
+
+```javascript
+// src/index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App'; // 导入你的React组件
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('app')
+);
+```
+
+最后，确保你的index.html文件位于public目录中，并引入Webpack打包生成的bundle.js文件。
+
+这样，你就能够在Webpack中成功集成React，并使用Webpack启动一个本地服务器，预览你的React应用程序。
+
+
+## 13. 请给出App的代码
+
+好的，下面是一个简单的App组件的代码示例：
+
+```jsx
+// src/App.js
+
+import React from 'react';
+
+const App = () => {
+  return (
+    <div>
+      <h1>Hello, React!</h1>
+      <p>This is a simple React app.</p>
+    </div>
+  );
+};
+
+export default App;
+```
+
+在这个示例中，我们定义了一个简单的函数组件App，它返回一个包含标题和段落的div元素。这是一个很简单的示例，你可以根据需要修改和扩展它。 
+
+确保你在index.js中正确地导入了App组件，就像我之前展示的那样。这样，在渲染根组件时，React就能够正确地将App组件渲染到页面上。
+
+
+## 14. 执行顺序
+
+我的package.json中的script配置如下：
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "start": "webpack-dev-server --open"
+  },
+我希望在执行start前，先执行build，如何配置？
+
+
+
+要在执行start之前先执行build，你可以使用npm的前置钩子（pre-）来实现。你可以在package.json的scripts中添加一个名为prestart的脚本，该脚本将在执行start之前自动运行。
+
+以下是修改后的package.json配置：
+
+```json
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "build": "webpack",
+  "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+  "start": "webpack-dev-server --open",
+  "prestart": "npm run build"
+}
+```
+
+现在，当你运行npm start时，npm会首先执行prestart脚本，也就是运行npm run build，然后再执行start脚本，启动Webpack服务器。这样就能够确保在启动Webpack服务器之前先构建你的项目。

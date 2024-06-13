@@ -1,20 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import _ from "lodash";
+/* eslint-disable prettier/prettier */
+// src/index.js
+import React from "react";
+import ReactDOM from "react-dom";
 
-import * as aa from "./t1";
+import App from './App';
+import Hello from "./Hello";
 
-function component() {
-  const element = document.createElement("div");
 
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(["Hello", "webpack"], " ");
-
-  return element;
-}
-
-const arr = [1, 2, 3];
-arr.map((item) => {
-  console.log("item:", item);
-});
-
-document.body.appendChild(component());
+const root = ReactDOM.createRoot(
+    document.getElementById('root') 
+  );
+  root.render(
+    <React.StrictMode>
+      <Hello />
+    </React.StrictMode>
+  );
+  
+ 
+  

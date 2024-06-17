@@ -1,1 +1,1 @@
-## 1. npx lerna init --packages="packages/*"
+## 1. npx lerna init --packages="packages/\*"

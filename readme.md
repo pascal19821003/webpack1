@@ -1,4 +1,4 @@
-## 1. webpack 
+## 1. webpack
 
 https://webpack.js.org/guides/getting-started/
 
@@ -6,9 +6,7 @@ npx webpack --config webpack.config.js
 
 npm run build
 
-
 ## 2. babel 是什么？做什么用？
-
 
 Babel 是一个 JavaScript 编译器，用于将现代 JavaScript 代码（包括最新的 ECMAScript 标准）转换为向后兼容的 JavaScript 代码，从而使其能够在旧版浏览器或环境中运行。它通常用于以下几个目的：
 
@@ -56,7 +54,7 @@ yarn add --dev @babel/core @babel/cli @babel/preset-env
 
 ```javascript
 module.exports = {
-  presets: ["@babel/preset-env"]
+  presets: ["@babel/preset-env"],
 };
 ```
 
@@ -83,13 +81,13 @@ npm install --save-dev babel-loader
 在 `webpack.config.js` 文件中添加 Babel Loader：
 
 ```javascript
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
@@ -97,21 +95,20 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
-      }
-    ]
-  }
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
+    ],
+  },
 };
 ```
 
 ### 总结
 
 Babel 是一个强大的工具，可以帮助你在各种环境中编写和使用现代 JavaScript 代码。通过将最新的 JavaScript 特性转换为向后兼容的版本，它确保了你的代码可以在尽可能多的环境中运行。结合构建工具，Babel 可以成为现代 JavaScript 开发工作流中的重要组成部分。
-
 
 ## 3. 如果我的工程中，同时包含js和ts，该如何配置babel？
 
@@ -138,14 +135,14 @@ yarn add --dev @babel/core @babel/preset-env @babel/preset-typescript @babel/pre
 ```javascript
 module.exports = {
   presets: [
-    '@babel/preset-env', // 转换最新的 ECMAScript 代码
-    '@babel/preset-typescript', // 转换 TypeScript 代码
-    '@babel/preset-react' // 如果使用 React，转换 JSX
+    "@babel/preset-env", // 转换最新的 ECMAScript 代码
+    "@babel/preset-typescript", // 转换 TypeScript 代码
+    "@babel/preset-react", // 如果使用 React，转换 JSX
   ],
   plugins: [
-    '@babel/plugin-proposal-class-properties', // 支持类属性
-    '@babel/plugin-proposal-object-rest-spread' // 支持对象展开运算符
-  ]
+    "@babel/plugin-proposal-class-properties", // 支持类属性
+    "@babel/plugin-proposal-object-rest-spread", // 支持对象展开运算符
+  ],
 };
 ```
 
@@ -190,16 +187,16 @@ yarn add --dev babel-loader ts-loader
 在项目根目录下创建或编辑 `webpack.config.js` 文件：
 
 ```javascript
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './src/index.js', // 或者 index.ts
+  entry: "./src/index.js", // 或者 index.ts
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   module: {
     rules: [
@@ -207,22 +204,15 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-typescript',
-              '@babel/preset-react'
-            ],
-            plugins: [
-              '@babel/plugin-proposal-class-properties',
-              '@babel/plugin-proposal-object-rest-spread'
-            ]
-          }
-        }
-      }
-    ]
-  }
+            presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"],
+            plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-object-rest-spread"],
+          },
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -246,28 +236,24 @@ yarn add --dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
 
 ```javascript
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended'
-  ],
+  parser: "@typescript-eslint/parser",
+  extends: ["eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/recommended"],
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: 'module',
+    sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: "detect",
+    },
   },
   rules: {
     // 自定义规则
   },
-  ignorePatterns: ['node_modules/', 'dist/']
+  ignorePatterns: ["node_modules/", "dist/"],
 };
 ```
 
@@ -289,7 +275,6 @@ npx webpack
 
 这样，您的项目就可以同时处理 JavaScript 和 TypeScript 文件，并且可以在构建过程中应用 Babel 的转换规则。
 
-
 ## 4. 执行这个命令： npx babel src --out-dir dist， ts文件没有编译。
 
 要使用 Babel 编译 TypeScript 文件，确保 Babel 配置文件和 TypeScript 配置文件正确设置，并且确保你正在正确地引用这些配置。以下是完整的步骤，以确保 TypeScript 文件可以通过 Babel 进行编译。
@@ -309,14 +294,14 @@ npm install --save-dev @babel/core @babel/preset-env @babel/preset-typescript @b
 ```javascript
 module.exports = {
   presets: [
-    '@babel/preset-env', // 转换最新的 ECMAScript 代码
-    '@babel/preset-typescript', // 转换 TypeScript 代码
-    '@babel/preset-react' // 如果使用 React，转换 JSX
+    "@babel/preset-env", // 转换最新的 ECMAScript 代码
+    "@babel/preset-typescript", // 转换 TypeScript 代码
+    "@babel/preset-react", // 如果使用 React，转换 JSX
   ],
   plugins: [
-    '@babel/plugin-proposal-class-properties', // 支持类属性
-    '@babel/plugin-proposal-object-rest-spread' // 支持对象展开运算符
-  ]
+    "@babel/plugin-proposal-class-properties", // 支持类属性
+    "@babel/plugin-proposal-object-rest-spread", // 支持对象展开运算符
+  ],
 };
 ```
 
@@ -354,7 +339,7 @@ const greet = (name: string): string => {
   return `Hello, ${name}!`;
 };
 
-console.log(greet('World'));
+console.log(greet("World"));
 ```
 
 ### 确保 Babel 处理 `.ts` 和 `.tsx` 文件
@@ -394,15 +379,8 @@ my-project/
 
 ```javascript
 module.exports = {
-  presets: [
-    '@babel/preset-env',
-    '@babel/preset-typescript',
-    '@babel/preset-react'
-  ],
-  plugins: [
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-object-rest-spread'
-  ]
+  presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"],
+  plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-object-rest-spread"],
 };
 ```
 
@@ -435,7 +413,7 @@ const greet = (name: string): string => {
   return `Hello, ${name}!`;
 };
 
-console.log(greet('World'));
+console.log(greet("World"));
 ```
 
 运行以下命令进行编译：
@@ -445,7 +423,6 @@ npx babel src --out-dir dist --extensions ".ts,.tsx,.js,.jsx"
 ```
 
 这将确保所有 TypeScript 文件被 Babel 编译为 JavaScript 并输出到 `dist` 目录。
-
 
 ## 5.这是一个新问题： 我想使用eslint。
 
@@ -481,36 +458,36 @@ npx eslint --init
 
 ```javascript
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript'
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
   ],
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: 'module',
+    sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: "detect",
+    },
   },
   rules: {
     // 自定义规则
-    'react/prop-types': 'off', // 如果你使用 TypeScript，可以禁用 prop-types 规则
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'import/no-unresolved': 'error',
-    'import/order': ['error', { 'newlines-between': 'always' }]
+    "react/prop-types": "off", // 如果你使用 TypeScript，可以禁用 prop-types 规则
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "import/no-unresolved": "error",
+    "import/order": ["error", { "newlines-between": "always" }],
   },
-  ignorePatterns: ['node_modules/', 'dist/']
+  ignorePatterns: ["node_modules/", "dist/"],
 };
 ```
 
@@ -558,37 +535,37 @@ npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 
 ```javascript
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-    'plugin:prettier/recommended'
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended",
   ],
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: 'module',
+    sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: "detect",
+    },
   },
   rules: {
-    'prettier/prettier': 'error',
-    'react/prop-types': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'import/no-unresolved': 'error',
-    'import/order': ['error', { 'newlines-between': 'always' }]
+    "prettier/prettier": "error",
+    "react/prop-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "import/no-unresolved": "error",
+    "import/order": ["error", { "newlines-between": "always" }],
   },
-  ignorePatterns: ['node_modules/', 'dist/']
+  ignorePatterns: ["node_modules/", "dist/"],
 };
 ```
 
@@ -611,7 +588,7 @@ module.exports = {
 我的eslint配置是： import js from "@eslint/js";
 
 export default [
-    js.configs.recommended,
+js.configs.recommended,
 
     {
         rules: {
@@ -619,9 +596,9 @@ export default [
             "no-undef": "warn"
         }
     }
+
 ];
 运行时报错： SyntaxError: Cannot use import statement outside a module
-
 
 这个错误是因为 Node.js 默认不支持 ES 模块（ESM）语法 `import`，除非明确指定。要解决这个问题，可以选择以下几种方式：
 
@@ -633,14 +610,14 @@ export default [
 const js = require("@eslint/js");
 
 module.exports = [
-    js.configs.recommended,
+  js.configs.recommended,
 
-    {
-        rules: {
-            "no-unused-vars": "warn",
-            "no-undef": "warn"
-        }
-    }
+  {
+    rules: {
+      "no-unused-vars": "warn",
+      "no-undef": "warn",
+    },
+  },
 ];
 ```
 
@@ -664,14 +641,14 @@ module.exports = [
    import js from "@eslint/js";
 
    export default [
-       js.configs.recommended,
+     js.configs.recommended,
 
-       {
-           rules: {
-               "no-unused-vars": "warn",
-               "no-undef": "warn"
-           }
-       }
+     {
+       rules: {
+         "no-unused-vars": "warn",
+         "no-undef": "warn",
+       },
+     },
    ];
    ```
 
@@ -710,7 +687,6 @@ module.exports = [
 
 根据你的需求和项目的配置环境，可以选择上述方法之一。推荐的方法是方法 1，因为它简单且兼容性好。如果项目中需要广泛使用 ESM 语法，可以考虑方法 2 或方法 3。
 
-
 ## 7. eslint 通常怎么使用？是使用独立配置？还是和webpack一起使用？
 
 ESLint 是一个独立的工具，可以通过命令行独立运行，也可以集成到构建工具如 Webpack 中，以便在开发过程中自动执行代码检查。以下是这两种常见的使用方法：
@@ -737,35 +713,35 @@ npx eslint --init
 
 ```javascript
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript'
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
   ],
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: 'module',
+    sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: "detect",
+    },
   },
   rules: {
-    'react/prop-types': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'import/no-unresolved': 'error',
-    'import/order': ['error', { 'newlines-between': 'always' }]
+    "react/prop-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "import/no-unresolved": "error",
+    "import/order": ["error", { "newlines-between": "always" }],
   },
-  ignorePatterns: ['node_modules/', 'dist/']
+  ignorePatterns: ["node_modules/", "dist/"],
 };
 ```
 
@@ -808,14 +784,14 @@ npm install --save-dev eslint-webpack-plugin
 在 `webpack.config.js` 中添加 ESLint 配置：
 
 ```javascript
-const ESLintPlugin = require('eslint-webpack-plugin');
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
   // 其他Webpack配置...
   plugins: [
     new ESLintPlugin({
-      extensions: ['js', 'jsx', 'ts', 'tsx'],
-      exclude: 'node_modules',
+      extensions: ["js", "jsx", "ts", "tsx"],
+      exclude: "node_modules",
       emitWarning: true,
       emitError: true,
     }),
@@ -826,13 +802,9 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-typescript',
-              '@babel/preset-react',
-            ],
+            presets: ["@babel/preset-env", "@babel/preset-typescript", "@babel/preset-react"],
           },
         },
       },
@@ -854,7 +826,6 @@ module.exports = {
 
 ESLint 可以独立使用，也可以集成到 Webpack 中。独立使用提供了最大的灵活性和简单性，而与 Webpack 集成则可以在开发过程中提供更好的即时反馈。你可以根据项目需求选择适合的方式，甚至同时使用这两种方法，以便在开发和构建过程中都进行代码质量检查。
 
-
 ## 8. eslint报这个错：'document' is not defined.eslintno-undef
 
 这个错误通常发生在 ESLint 解析代码时，不知道 `document` 是一个全局变量。通常在浏览器环境中，`document` 是一个全局对象，但 ESLint 需要显式配置来识别这种环境。
@@ -871,39 +842,39 @@ ESLint 可以独立使用，也可以集成到 Webpack 中。独立使用提供�
 
 ```javascript
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript'
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
   ],
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: 'module',
+    sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: "detect",
+    },
   },
   env: {
-    browser: true,  // 添加这一行
-    node: true      // 如果你也需要支持 Node.js 环境
+    browser: true, // 添加这一行
+    node: true, // 如果你也需要支持 Node.js 环境
   },
   rules: {
-    'react/prop-types': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'import/no-unresolved': 'error',
-    'import/order': ['error', { 'newlines-between': 'always' }]
+    "react/prop-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "import/no-unresolved": "error",
+    "import/order": ["error", { "newlines-between": "always" }],
   },
-  ignorePatterns: ['node_modules/', 'dist/']
+  ignorePatterns: ["node_modules/", "dist/"],
 };
 ```
 
@@ -912,7 +883,6 @@ module.exports = {
 在 ESLint 配置文件中指定 `env` 设置为 `browser`，可以解决 ESLint 报 `'document' is not defined.eslintno-undef` 的问题。这样 ESLint 就会知道 `document` 是浏览器环境中的全局变量。
 
 通过这种方式，其他浏览器环境中的全局变量如 `window` 和 `navigator` 也会被识别。如果你的项目还需要支持 Node.js 环境，可以同时添加 `node: true`。
-
 
 ## 9. run webpack-dev-server
 
@@ -929,14 +899,14 @@ npx webpack-dev-server --open
 ```javascript
 // webpack.config.js
 
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './src/index.js', // 入口文件
+  entry: "./src/index.js", // 入口文件
   output: {
-    path: path.resolve(__dirname, 'dist'), // 输出目录
-    filename: 'bundle.js', // 输出文件名
-    publicPath: '/' // 指定public目录路径
+    path: path.resolve(__dirname, "dist"), // 输出目录
+    filename: "bundle.js", // 输出文件名
+    publicPath: "/", // 指定public目录路径
   },
   module: {
     rules: [
@@ -944,11 +914,11 @@ module.exports = {
         test: /\.js$/, // 匹配.js文件
         exclude: /node_modules/, // 排除node_modules目录
         use: {
-          loader: 'babel-loader' // 使用babel-loader处理js文件
-        }
-      }
-    ]
-  }
+          loader: "babel-loader", // 使用babel-loader处理js文件
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -958,13 +928,11 @@ module.exports = {
 
 这样，Webpack应该能够正确找到public目录中的文件，并在启动时加载它们。
 
-
-## 11. tsx 
+## 11. tsx
 
 npm i --save-dev @types/react
 
 ## 12. 我还要集成reactjs，改怎么做？
-
 
 若要在Webpack中集成React.js，你需要对Webpack配置进行一些修改以支持React的编译和加载。下面是如何修改Webpack配置文件以支持React的示例：
 
@@ -979,14 +947,14 @@ npm install react react-dom @babel/preset-react --save
 ```javascript
 // webpack.config.js
 
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './src/index.js', // 入口文件
+  entry: "./src/index.js", // 入口文件
   output: {
-    path: path.resolve(__dirname, 'dist'), // 输出目录
-    filename: 'bundle.js', // 输出文件名
-    publicPath: '/' // 指定public目录路径
+    path: path.resolve(__dirname, "dist"), // 输出目录
+    filename: "bundle.js", // 输出文件名
+    publicPath: "/", // 指定public目录路径
   },
   module: {
     rules: [
@@ -994,14 +962,14 @@ module.exports = {
         test: /\.js$/, // 匹配.js文件
         exclude: /node_modules/, // 排除node_modules目录
         use: {
-          loader: 'babel-loader', // 使用babel-loader处理js文件
+          loader: "babel-loader", // 使用babel-loader处理js文件
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'] // 添加React预设
-          }
-        }
-      }
-    ]
-  }
+            presets: ["@babel/preset-env", "@babel/preset-react"], // 添加React预设
+          },
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -1012,22 +980,21 @@ module.exports = {
 ```javascript
 // src/index.js
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App'; // 导入你的React组件
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App"; // 导入你的React组件
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('app')
+  document.getElementById("app")
 );
 ```
 
 最后，确保你的index.html文件位于public目录中，并引入Webpack打包生成的bundle.js文件。
 
 这样，你就能够在Webpack中成功集成React，并使用Webpack启动一个本地服务器，预览你的React应用程序。
-
 
 ## 13. 请给出App的代码
 
@@ -1036,7 +1003,7 @@ ReactDOM.render(
 ```jsx
 // src/App.js
 
-import React from 'react';
+import React from "react";
 
 const App = () => {
   return (
@@ -1050,23 +1017,20 @@ const App = () => {
 export default App;
 ```
 
-在这个示例中，我们定义了一个简单的函数组件App，它返回一个包含标题和段落的div元素。这是一个很简单的示例，你可以根据需要修改和扩展它。 
+在这个示例中，我们定义了一个简单的函数组件App，它返回一个包含标题和段落的div元素。这是一个很简单的示例，你可以根据需要修改和扩展它。
 
 确保你在index.js中正确地导入了App组件，就像我之前展示的那样。这样，在渲染根组件时，React就能够正确地将App组件渲染到页面上。
-
 
 ## 14. 执行顺序
 
 我的package.json中的script配置如下：
- "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "start": "webpack-dev-server --open"
-  },
+"scripts": {
+"test": "echo \"Error: no test specified\" && exit 1",
+"build": "webpack",
+"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+"start": "webpack-dev-server --open"
+},
 我希望在执行start前，先执行build，如何配置？
-
-
 
 要在执行start之前先执行build，你可以使用npm的前置钩子（pre-）来实现。你可以在package.json的scripts中添加一个名为prestart的脚本，该脚本将在执行start之前自动运行。
 

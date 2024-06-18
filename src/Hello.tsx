@@ -5,7 +5,7 @@ import Bottom from "bottom/src/Bottom";
 export default function Hello() {
   return (
     <div>
-      Hello, World!
+      Hello, World! haha
       <Header></Header>
       <Bottom></Bottom>
     </div>

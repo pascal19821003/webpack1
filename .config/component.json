@@ -1,0 +1,20 @@
+{
+    "AA": {
+      "packageName": "AA",
+      "reviewers": [
+        {
+          "identity": "igshor",
+          "reason": "owner"
+        },
+        {
+          "identity": "msecsccsme",
+          "reason": "team"
+        },
+        {
+          "identity": "advfilter",
+          "reason": "override"
+        }
+      ],
+      "subcomponent": true
+    }
+}

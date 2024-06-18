@@ -9,7 +9,7 @@
     "alwaysStrict": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "moduleResolution": "node16",
+    "moduleResolution": "Node", //node16
     "resolveJsonModule": true,
     "types": [ "node"],
     "lib": ["DOM", "DOM.Iterable", "ES2021"],

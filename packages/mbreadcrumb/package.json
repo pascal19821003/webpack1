@@ -1,0 +1,16 @@
+{
+  "name": "mbreadcrumb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "storybook-scoped",
+    "build": "npm run tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fluentui/react": "^8.118.8"
+  }
+}

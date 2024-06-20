@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 // import { ButtonA, IButtonAProps } from "mbutton/lib/ButtonA";
-import { MDiv, type MDivProps } from "mdiv/lib/index";
-import { action } from "@storybook/addon-actions";
+// import { MDiv, type MDivProps } from "../../packages/mdiv/src";
+// import { action } from "@storybook/addon-actions";
+// import { MDiv, type MDivProps } from "mdiv/lib";
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { MDiv, type MDivProps } from "../src/index";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

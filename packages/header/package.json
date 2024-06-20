@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf lib",
     "build": "npm run copy-config && tsc",
     "copy-config": "copyfiles -f ../../.config/metadata.json src"
   },

@@ -26,3 +26,5 @@ yarn-error.log*
 /packages/**/lib/*
 
 *storybook.log
+
+/scripts/node_modules/*

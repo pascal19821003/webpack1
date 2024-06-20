@@ -9,7 +9,8 @@
     "build": "lerna run build --stream",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier . --write",
-    "start": "webpack-dev-server --open",
+    "startDevserver": "webpack-dev-server --open",
+    "start": "lerna run copy-config --stream && node ./scripts/tasks/startStorybook.js",
     "prestart": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
